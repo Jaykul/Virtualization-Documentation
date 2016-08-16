@@ -71,7 +71,8 @@ Expand-Archive -Path "$env:TEMP\docker-1.12.0.zip" -DestinationPath $env:Program
 Add the Docker directory to the system path.
 
 ```none
-[Environment]::SetEnvironmentVariable("Path", $env:Path + ";$env:ProgramFiles\docker\", [EnvironmentVariableTarget]::Machine)
+$Path = [Environment]::GetEnvironmentVariable("Path", "Machine") + ";${Env:ProgramFiles}\docker\"
+[Environment]::SetEnvironmentVariable("Path", $Path, "Machine")
 ```
 
 Restart the PowerShell session so that the modified path is recognized.
